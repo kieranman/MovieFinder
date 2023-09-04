@@ -29,6 +29,8 @@
     width: 100%;
 }
 
+
+
 .descritpion{
     position: absolute;
     top: 0;
@@ -37,12 +39,37 @@
     width: 65%;
     background-color: whitesmoke;
     color:#626B6B ;
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 10px; /* Add padding for content */
+    box-sizing: border-box; /* Ensure padding is included in the height */
 }
 
 .descritpion h1,p{
     padding:5px;
     margin-top: 0;
 }
+
+/* Hide the scrollbar by default */
+.descritpion::-webkit-scrollbar {
+    width: 0.5em;
+  }
+  
+  .descritpion::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .descritpion::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+  
+  /* Show the scrollbar when hovering over the card */
+  .movie-card:hover .descritpion::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  .movie-card:hover .descritpion::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 
 
 
