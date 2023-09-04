@@ -1,0 +1,15 @@
+nav li,a{
+    display: inline;
+    list-style: none;
+    padding: 5px;
+    font-size: 20px;
+    color:white;
+    
+}
+nav{
+    text-align: center;
+    top: 0;
+    padding:20px;
+    height: 20vh;
+    background-color: #333;
+}

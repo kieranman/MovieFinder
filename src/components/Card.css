@@ -1,0 +1,68 @@
+.movie-card{
+    position: relative;
+    grid-column: span 4;
+    height:250px;
+    max-width: 90vw;
+    background-color: whitesmoke;
+
+    box-shadow:
+    0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12)
+    
+    
+}
+
+
+.image{
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 35%; 
+    height: 100%; 
+}
+.image img{
+    height: 100%;
+    width: 100%;
+}
+
+.descritpion{
+    position: absolute;
+    top: 0;
+    height: 85%;
+    right: 0;
+    width: 65%;
+    background-color: whitesmoke;
+    color:#626B6B ;
+}
+
+.descritpion h1,p{
+    padding:5px;
+    margin-top: 0;
+}
+
+
+
+.tags{
+    position: absolute;
+    background-color: #E5E5E5;
+    bottom: 0;
+    height: 15%;
+    width: 65%;
+    right: 0;
+    text-align: center;
+
+}
+.tags p{
+    display: inline-block;
+    margin-top: 4px;
+    padding: 5px 15px;
+    background-color: #b22222 ;
+    color: white;
+    border-radius: 25px;
+    margin-left: 5px;
+
+}
