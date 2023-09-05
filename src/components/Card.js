@@ -24,6 +24,7 @@ export default function Card({ movie, genres }) {
           <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={movie.title} />
         </div>
         <div className="descritpion">
+          <div className='score'>{movie.vote_average}</div>
           <h1>{movie.title}</h1>
           <p>{movie.overview}</p>
         </div>

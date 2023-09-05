@@ -3,8 +3,8 @@ main{
     padding: 20px;
     margin: -120px auto;
     max-width: 1600px;
-}
 
+}
 .grid{
     display: grid;
     grid-template-columns: repeat(12,1fr);
