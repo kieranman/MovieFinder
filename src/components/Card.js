@@ -1,5 +1,4 @@
 import './Card.css'
-import cardImage from './batman.jpg'
 export default function Card({ movie, genres }) {
     const renderGenres = [];
     let count = 0;
