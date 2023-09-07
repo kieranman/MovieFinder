@@ -1,4 +1,5 @@
 import './Card.css'
+import {BsEmojiSmile,BsEmojiExpressionless,BsEmojiFrown} from 'react-icons/bs';
 export default function Card({ movie, genres }) {
     const renderGenres = [];
     let count = 0;
@@ -16,6 +17,20 @@ export default function Card({ movie, genres }) {
         }
       }
     }
+
+    const renderScore = ()=>{
+      if(movie.vote_average*10>=70){
+
+        return<BsEmojiSmile color='green' size={25}/>;
+      }
+      else if(movie.vote_average*10>=60 && movie.vote_average*10<70){
+        return<BsEmojiExpressionless color='orange' size={25}/>
+      }
+      else{
+        return<BsEmojiFrown color='red' size={25}/>
+      }
+
+  }
   
     return (
       <div className="movie-card">
@@ -23,7 +38,10 @@ export default function Card({ movie, genres }) {
           <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={movie.title} />
         </div>
         <div className="descritpion">
-          <div className='score'>{movie.vote_average}</div>
+        <div className='score'>
+            {renderScore()}
+            <span className="score-text">{movie.vote_average * 10 + '%'}</span>
+          </div>
           <h1>{movie.title}</h1>
           <p>{movie.overview}</p>
         </div>
