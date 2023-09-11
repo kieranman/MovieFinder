@@ -1,6 +1,6 @@
 import './Card.css'
-import {BsEmojiSmile,BsEmojiExpressionless,BsEmojiFrown} from 'react-icons/bs';
-export default function Card({ movie, genres }) {
+import {BsEmojiSmile,BsEmojiExpressionless,BsEmojiFrown,BsFillPlayFill} from 'react-icons/bs';
+export default function Card({ movie, genres,openModal }) {
     const renderGenres = [];
     let count = 0;
   
@@ -18,6 +18,7 @@ export default function Card({ movie, genres }) {
       }
     }
 
+
     const renderScore = ()=>{
       if(movie.vote_average*10>=70){
 
@@ -33,7 +34,7 @@ export default function Card({ movie, genres }) {
   }
   
     return (
-      <div className="movie-card">
+      <div className="movie-card" onClick={() => openModal(movie.id)}>
         <div className="image">
           <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={movie.title} />
         </div>

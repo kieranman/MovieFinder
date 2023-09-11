@@ -18,7 +18,7 @@ function Provider({children}){
         return response.data.results;
     };
 
-    const fetchGenres = async (term) => {
+    const fetchGenres = async () => {
         const response = await axios.get('https://api.themoviedb.org/3/genre/movie/list?language=en',{
             headers:{
                 Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZjM4NGUwZGJhZWE5YjhhYTRhMThmYWI3Y2NiNjNhZiIsInN1YiI6IjY0ZjViNDNiZTBjYTdmMDE0ZjZjNTAwZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.jYzICKyrxkPS8rLbwYGnELXw3GcTefn00dp6gOBBDIE',
@@ -31,9 +31,24 @@ function Provider({children}){
         return response.data.genres;
     };
 
+    
+    const fetchMovieVideo = async (movieId) => {
+        const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,{
+            headers:{
+                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZjM4NGUwZGJhZWE5YjhhYTRhMThmYWI3Y2NiNjNhZiIsInN1YiI6IjY0ZjViNDNiZTBjYTdmMDE0ZjZjNTAwZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.jYzICKyrxkPS8rLbwYGnELXw3GcTefn00dp6gOBBDIE',
+                accept: 'application/json'
+            },
+
+        });
+        
+
+        return response.data.results;
+    };
+
     const valueToShare ={
         fetchMovies,
         fetchGenres,
+        fetchMovieVideo
     };
 
     return <MovieContext.Provider value={valueToShare}>{children}

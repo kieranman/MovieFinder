@@ -1,0 +1,54 @@
+/* Modal Background */
+.modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999; /* Ensure the modal is on top of everything */
+  }
+  
+/* Modal Box */
+.modal-box {
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+    gap:50px;
+    background-color: #E5E5E5;
+    width: 60%;
+    height: 70%;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.video-box{
+    display: grid;
+    grid-column: span 12;
+}
+iframe{
+    height: 100%;
+    width: 100%;
+}
+
+
+/* Close Button */
+.modal-box button {
+    background-color: #b22222;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* Close Button Hover State */
+  .modal-box button:hover {
+    background-color: #ff0000;
+  }
+  
+  

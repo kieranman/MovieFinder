@@ -14,3 +14,7 @@
     font-size: 1rem;;
     padding: 15px 15px;
 }
+
+.load-more:hover{
+    background-color: #8E1B1B;
+}
