@@ -17,12 +17,12 @@
     display: grid;
     grid-template-columns: repeat(12,1fr);
     gap:50px;
-    background-color: #E5E5E5;
+
     width: 60%;
     height: 70%;
-    padding: 20px;
+    /* padding: 20px;
     border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); */
 }
 
 .video-box{
@@ -30,6 +30,7 @@
     grid-column: span 12;
 }
 iframe{
+    border: none;
     height: 100%;
     width: 100%;
 }

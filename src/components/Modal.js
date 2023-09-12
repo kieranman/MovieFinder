@@ -28,22 +28,18 @@ export default function Modal({closeModal,movieId}){
                 setVideo(teaser);
             }
             catch{
-
+                setVideo("none");
             }
             
         }
-        
-
+        console.log(teaser);
+        console.log(video)
     }
     useEffect(()=>{
         console.log(movieId)
         fetchResultVideo();
 
     },[]);
-
-
-
-
     return ReactDOM.createPortal(
         <div className="modal-background" onClick={closeModal}>
            <div className="modal-box">

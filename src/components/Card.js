@@ -1,5 +1,6 @@
 import './Card.css'
 import {BsEmojiSmile,BsEmojiExpressionless,BsEmojiFrown,BsFillPlayFill} from 'react-icons/bs';
+import { formToJSON } from 'axios';
 export default function Card({ movie, genres,openModal }) {
     const renderGenres = [];
     let count = 0;
@@ -36,12 +37,12 @@ export default function Card({ movie, genres,openModal }) {
     return (
       <div className="movie-card" onClick={() => openModal(movie.id)}>
         <div className="image">
-          <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={movie.title} />
+          <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={""} />
         </div>
         <div className="descritpion">
         <div className='score'>
             {renderScore()}
-            <span className="score-text">{movie.vote_average * 10 + '%'}</span>
+            <span className="score-text">{Math.round(movie.vote_average * 10) + '%'}</span>
           </div>
           <h1>{movie.title}</h1>
           <p>{movie.overview}</p>
