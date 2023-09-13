@@ -6,7 +6,7 @@ import BeatLoader from 'react-spinners/BeatLoader.js'
 import Modal from "../components/Modal.js";
 import Filters from "../components/Filters.js";
 export default function MoviePage(){
-    const {fetchMovies,fetchGenres,fetchMoviesByTitle} = useContext(MovieContext);
+    const {fetchMovies,fetchGenres,fetchMoviesByTitle,fetchSortedMovies} = useContext(MovieContext);
 
     const [page,setPage] = useState(1);
     const [genres,setGenres] = useState([]);
@@ -15,6 +15,7 @@ export default function MoviePage(){
     const [openModal,setOpenModal] = useState(false);
     const [movieModalId,setMovieModalId] = useState();
     const [search,setSearch] = useState("");
+    const [sort,setSort] = useState("");
     
     // pagination
     const handleClick =() =>{
@@ -66,13 +67,31 @@ export default function MoviePage(){
           }, 700);
     }
 
+    
+    const fetchResultsSort = async ()=>{
+        const result =await fetchSortedMovies(page,sort);
+        // setMovies(result);
+        setTimeout(() => {
+            setMovies(pre=>[...pre,...result]);
+            setLoading(false); // Hide the loader after 2 seconds
+          }, 700);
+    } 
+
     // Search functionality
     const handleSearch = (input)=>{
         setLoading(true);
         setMovies([])
         setPage(1);
         setSearch(input);
+    }
 
+    const handleSort = (input) =>{
+        console.log(input)
+        setLoading(true);
+        setMovies([])
+        setSearch("");
+        setPage(1);
+        setSort(input);
     }
 
 
@@ -80,18 +99,23 @@ export default function MoviePage(){
         if(genres.length===0){
             fetchResultGenres();
         }
-        if((loading && search=="") || (page===1 && search==="")){
+
+        if(sort==="" && search==="" && loading){
             fetchResultMovies();
             console.log("normal movies")
         }
-        else if(loading && search!=""){
+        else if(loading && search!="" ){
             fetchResultsSearch();
             console.log("filter search")
+        }
+        else if(loading && sort!="" && search===""){
+            fetchResultsSort();
+            console.log("sorted movies")
         }
         
         
 
-    },[page,search]);
+    },[page,search,sort]);
 
 
     const renderedMovies = movies.map((movie)=>{
@@ -101,7 +125,7 @@ export default function MoviePage(){
     return (
         <div className="background">
             {openModal && <Modal closeModal={handleModalClose} movieId={movieModalId}/>}
-            <Filters handleSearch={handleSearch}/>
+            <Filters handleSort={handleSort} handleSearch={handleSearch}/>
 
             <main className="grid">
                 {renderedMovies}

@@ -6,7 +6,7 @@ export default function Navbar() {
     <nav>
       <ul>
         <li><Link to='/movies'>Movies</Link></li>
-        <li><a href="">TV shows</a></li>
+        <li><Link to='/tv'>TV shows</Link></li>
         <li><a href="">Recommended</a></li>
         <li><a href="">Reviews</a></li>
       </ul>

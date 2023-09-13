@@ -1,10 +1,14 @@
 import './Filters.css';
 import { useState } from 'react';
 import {BiSearchAlt,BiFilterAlt} from "react-icons/bi";
-export default function Filters({handleSearch}){
+export default function Filters({handleSearch,handleSort}){
     const [search,setSearch] = useState(false);
     const [title,setTitle] = useState("");
     const [dropdown,setDropDown]= useState(false)
+
+    // const showTags=()=>{
+
+    // }
 
     const handleShowSearch =()=>{
         setSearch(!search);
@@ -18,7 +22,6 @@ export default function Filters({handleSearch}){
         event.preventDefault();
         handleSearch(title);
     }
-  
     const handleShowDropDown = ()=>{
         setDropDown(!dropdown);
     }
@@ -29,10 +32,10 @@ export default function Filters({handleSearch}){
         <div className="search-bar-container">
           <a><BiFilterAlt onClick={handleShowDropDown}/>
             {dropdown &&<div className='dropdown'>
-              <ul>
-                <li>Popularity</li>
-                <li>Score</li>
-                <li>Latest</li>
+              <ul onMouseLeave={handleShowDropDown}>
+                <li onClick={() => handleSort('popularity')}>Popularity</li>
+                <li onClick={() => handleSort('score')}>Score</li>
+                <li onClick={() => handleSort('latest')}>Latest</li>
               </ul>
             </div>}
           </a>
