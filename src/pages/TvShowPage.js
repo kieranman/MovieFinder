@@ -13,7 +13,7 @@ export default function MoviePage(){
     const [tvShows,setTvShows]= useState([]);
     const [loading,setLoading] = useState(true);
     const [openModal,setOpenModal] = useState(false);
-    const [movieModalId,setMovieModalId] = useState();
+    const [tvShowModalId,setTvShowModalId] = useState();
     const [search,setSearch] = useState("");
     const [sort,setSort] = useState("");
     
@@ -27,9 +27,8 @@ export default function MoviePage(){
     };
 
     // handles modal close and open for cards
-    const handleCardClick = (movieId)=>{
-        setMovieModalId(movieId);
-        console.log(movieId);
+    const handleCardClick = (tvShowId)=>{
+        setTvShowModalId(tvShowId);
         setOpenModal(true);
     };
     const handleModalClose = ()=>{
@@ -71,7 +70,6 @@ export default function MoviePage(){
     }
 
     const handleSort = (input) =>{
-        console.log(input)
         setLoading(true);
         setTvShows([])
         setSort(input);
@@ -89,7 +87,6 @@ export default function MoviePage(){
         }
         if(sort==="" && search==="" && loading){
             fetchResultTvShows();
-            console.log("normal movies")
         }
         // else if(loading && search!="" ){
         //     fetchResultsSearch();
@@ -111,7 +108,7 @@ export default function MoviePage(){
 
     return (
         <div className="background">
-            {openModal && <Modal closeModal={handleModalClose} itemId={movieModalId} isMovie={false}/>}
+            {openModal && <Modal closeModal={handleModalClose} itemId={tvShowModalId} isMovie={false}/>}
             <Filters handleSort={handleSort} handleSearch={handleSearch}/>
 
             <main className="grid">

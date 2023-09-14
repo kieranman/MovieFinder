@@ -86,7 +86,6 @@ export default function MoviePage(){
     }
 
     const handleSort = (input) =>{
-        console.log(input)
         setLoading(true);
         setMovies([])
         setSort(input);
@@ -103,15 +102,12 @@ export default function MoviePage(){
 
         if(sort==="" && search==="" && loading){
             fetchResultMovies();
-            console.log("normal movies")
         }
         else if(loading && search!="" ){
             fetchResultsSearch();
-            console.log("filter search")
         }
         else if(loading && sort!="" && search===""){
             fetchResultsSort();
-            console.log("sorted movies")
         }
         
         

@@ -19,7 +19,6 @@ export default function Modal({closeModal,itemId,isMovie}){
 
         for(let i=0;i<result.length;i++){
             if(result[i].type=="Trailer" ){
-                console.log(result[i].key)
                 setVideo(result[i].key);
                 break;
             }
@@ -32,15 +31,13 @@ export default function Modal({closeModal,itemId,isMovie}){
                 setVideo(teaser);
             }
             catch{
-                setVideo("none");
+                setVideo(result[0]);
             }
             
         }
-        console.log(teaser);
-        console.log(video)
+
     }
     useEffect(()=>{
-        console.log(itemId)
         fetchResultVideo();
 
     },[]);
