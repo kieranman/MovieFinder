@@ -2,13 +2,16 @@ import ReactDOM from "react-dom"
 import './Modal.css';
 import { useEffect ,useContext,useState} from "react";
 import MovieContext from "../context/MovieContext";
+import TvShowContext from "../context/TvShowContext";
 import { SlClose } from "react-icons/sl";
-export default function Modal({closeModal,movieId}){
-    const {fetchMovieVideo} = useContext(MovieContext);
+export default function Modal({closeModal,itemId,isMovie}){
+    const {fetchMovieVideo,} = useContext(MovieContext);
+    const {fetchTvShowVideo,} = useContext(TvShowContext);
+    
     const [video,setVideo] = useState("");
 
     const fetchResultVideo = async ()=>{
-        const result =await fetchMovieVideo(movieId);
+        const result =await (isMovie?fetchMovieVideo(itemId):fetchTvShowVideo(itemId));
         let teaser;
 
         // if there isnt an trailer we will try to get a teaser 
@@ -37,7 +40,7 @@ export default function Modal({closeModal,movieId}){
         console.log(video)
     }
     useEffect(()=>{
-        console.log(movieId)
+        console.log(itemId)
         fetchResultVideo();
 
     },[]);

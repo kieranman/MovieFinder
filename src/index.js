@@ -3,13 +3,16 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import Navbar from './components/Navbar';
-import {Provider} from './context/MovieContext';
+import {MovieProvider} from './context/MovieContext';
+import {TvShowProvider} from './context/TvShowContext';
 const el = document.getElementById('root');
 
 
 const root = ReactDOM.createRoot(el);
 
 root . render(
-    <Provider>
+    <TvShowProvider>
+    <MovieProvider>
         <App/>
-    </Provider>);
+    </MovieProvider>
+    </TvShowProvider>);

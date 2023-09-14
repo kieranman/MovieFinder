@@ -75,3 +75,18 @@
   color: white;
   border-radius: 5px;
 }
+
+.genres{
+  background-color: #b22222;
+  top: 100%;
+  left: 0;
+  position: absolute;
+}
+.genres li{
+
+}
+
+.genres ul{
+  padding: 0px;
+  margin:0px;
+}

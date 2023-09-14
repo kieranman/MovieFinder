@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const MovieContext = createContext();
 
-function Provider({children}){
+function MovieProvider({children}){
     
 
     const fetchMoviesByTitle = async(page,search) =>{
@@ -91,5 +91,5 @@ function Provider({children}){
     return <MovieContext.Provider value={valueToShare}>{children}
     </MovieContext.Provider>
 }
-export {Provider};
+export {MovieProvider};
 export default MovieContext ;
