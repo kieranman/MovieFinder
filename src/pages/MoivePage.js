@@ -6,7 +6,7 @@ import BeatLoader from 'react-spinners/BeatLoader.js'
 import Modal from "../components/Modal.js";
 import Filters from "../components/Filters.js";
 export default function MoviePage(){
-    const {fetchMovies,fetchGenres,fetchMoviesByTitle,fetchSortedMovies} = useContext(MovieContext);
+    const {fetchMovies,fetchGenres,fetchMoviesByTitle,fetchSortedMovies,fetchMovieByGenre} = useContext(MovieContext);
 
     const [page,setPage] = useState(1);
     const [genres,setGenres] = useState([]);
@@ -16,6 +16,7 @@ export default function MoviePage(){
     const [movieModalId,setMovieModalId] = useState();
     const [search,setSearch] = useState("");
     const [sort,setSort] = useState("");
+    const [genreFilter,setGenreFilter]= useState("");
     
     // pagination
     const handleClick =() =>{
@@ -77,6 +78,15 @@ export default function MoviePage(){
           }, 700);
     } 
 
+    const fetchResultFilterGenre = async ()=>{
+        const result =await fetchMovieByGenre(page,genreFilter);
+        // setMovies(result);
+        setTimeout(() => {
+            setMovies(pre=>[...pre,...result]);
+            setLoading(false); // Hide the loader after 2 seconds
+          }, 700);
+    } 
+
     // Search functionality
     const handleSearch = (input)=>{
         setLoading(true);
@@ -94,25 +104,37 @@ export default function MoviePage(){
         
     }
 
-
-    useEffect(()=>{
-        if(genres.length===0){
-            fetchResultGenres();
-        }
-
-        if(sort==="" && search==="" && loading){
-            fetchResultMovies();
-        }
-        else if(loading && search!="" ){
-            fetchResultsSearch();
-        }
-        else if(loading && sort!="" && search===""){
-            fetchResultsSort();
-        }
+    const handleFilterGenre = (input) =>{
+        console.log(input);
+        setLoading(true);
+        setMovies([])
+        setGenreFilter(input)
+        setSort("");
+        setSearch("");
+        setPage(1);
         
-        
+    }
 
-    },[page,search,sort]);
+
+    useEffect(() => {
+        if (genres.length === 0) {
+          fetchResultGenres();
+        }
+      
+        if (sort === "" && search === "" && genreFilter==="" && loading) {
+          fetchResultMovies();
+          console.log("normal");
+        } else if (loading && search !== "") {
+          fetchResultsSearch();
+          console.log("search");
+        } else if (loading && sort !== "" && search === "") {
+          fetchResultsSort();
+          console.log("sort");
+        } else if (loading && genreFilter !== "") { // Corrected condition here
+          fetchResultFilterGenre();
+          console.log("genre");
+        }
+      }, [page, search, sort, genreFilter]);
 
 
     const renderedMovies = movies.map((movie)=>{
@@ -122,7 +144,7 @@ export default function MoviePage(){
     return (
         <div className="background">
             {openModal && <Modal closeModal={handleModalClose} itemId={movieModalId} isMovie={true}/>}
-            <Filters handleSort={handleSort} handleSearch={handleSearch}/>
+            <Filters handleSort={handleSort} handleSearch={handleSearch} genres={genres} handleFilterGenre={handleFilterGenre}/>
 
             <main className="grid">
                 {renderedMovies}

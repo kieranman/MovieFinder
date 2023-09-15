@@ -19,7 +19,7 @@ export default function Card({ item, genres,openModal,isMovie }) {
         renderGenres.push(<p key={genre.id}>{genre.name}</p>);
         count++;
   
-        if (count === 3) {
+        if (count === 2) {
           break;
         }
       }

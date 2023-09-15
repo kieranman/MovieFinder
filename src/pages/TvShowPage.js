@@ -6,7 +6,7 @@ import Modal from "../components/Modal.js";
 import Filters from "../components/Filters.js";
 import TvShowContext from "../context/TvShowContext.js";
 export default function MoviePage(){
-    const {fetchTvShows,fetchGenres} = useContext(TvShowContext);
+    const {fetchTvShows,fetchGenres,fetchSortedTvShows,fetchTvShowByTitle,fetchTvShowByGenre} = useContext(TvShowContext);
 
     const [page,setPage] = useState(1);
     const [genres,setGenres] = useState([]);
@@ -16,6 +16,7 @@ export default function MoviePage(){
     const [tvShowModalId,setTvShowModalId] = useState();
     const [search,setSearch] = useState("");
     const [sort,setSort] = useState("");
+    const [genreFilter,setGenreFilter]= useState("");
     
     // pagination
     const handleClick =() =>{
@@ -61,6 +62,32 @@ export default function MoviePage(){
         setGenres(result);
     }
 
+    const fetchResultsSort = async ()=>{
+        const result =await fetchSortedTvShows(page,sort);
+        // setMovies(result);
+        setTimeout(() => {
+            setTvShows(pre=>[...pre,...result]);
+            setLoading(false); // Hide the loader after 2 seconds
+          }, 700);
+    } 
+
+    const fetchResultsSearch = async ()=>{
+        const result =await fetchTvShowByTitle(page,search);
+        setTimeout(() => {
+            setTvShows(pre=>[...pre,...result]);
+            setLoading(false); // Hide the loader after 2 seconds
+          }, 700);
+    }
+    
+    const fetchResultFilterGenre = async ()=>{
+        const result =await fetchTvShowByGenre(page,genreFilter);
+        // setMovies(result);
+        setTimeout(() => {
+            setTvShows(pre=>[...pre,...result]);
+            setLoading(false); // Hide the loader after 2 seconds
+          }, 700);
+    } 
+
     // Search functionality
     const handleSearch = (input)=>{
         setLoading(true);
@@ -77,29 +104,36 @@ export default function MoviePage(){
         setPage(1);
         
     }
-
-
-    useEffect(()=>{
-
-
-        if(genres.length===0){
-            fetchResultGenres();
-        }
-        if(sort==="" && search==="" && loading){
-            fetchResultTvShows();
-        }
-        // else if(loading && search!="" ){
-        //     fetchResultsSearch();
-        //     console.log("filter search")
-        // }
-        // else if(loading && sort!="" && search===""){
-        //     fetchResultsSort();
-        //     console.log("sorted movies")
-        // }
+    const handleFilterGenre = (input) =>{
+        console.log(input);
+        setLoading(true);
+        setTvShows([])
+        setGenreFilter(input)
+        setSort("");
+        setSearch("");
+        setPage(1);
         
-        
+    }
 
-    },[page,search,sort]);
+
+    useEffect(() => {
+        if (genres.length === 0) {
+          fetchResultGenres();
+        }
+        if (sort === "" && search === "" && genreFilter==="" && loading) {
+          fetchResultTvShows();
+          console.log("normal");
+        } else if (loading && search !== "") {
+          fetchResultsSearch();
+          console.log("search");
+        } else if (loading && sort !== "" && search === "") {
+          fetchResultsSort();
+          console.log("sort");
+        } else if (loading && genreFilter !== "") {
+          fetchResultFilterGenre();
+          console.log("genre");
+        }
+      }, [page, search, sort, genreFilter]);
 
 
     const renderedTvShows = tvShows.map((show)=>{
@@ -109,7 +143,7 @@ export default function MoviePage(){
     return (
         <div className="background">
             {openModal && <Modal closeModal={handleModalClose} itemId={tvShowModalId} isMovie={false}/>}
-            <Filters handleSort={handleSort} handleSearch={handleSearch}/>
+            <Filters handleSort={handleSort} handleSearch={handleSearch} handleFilterGenre={handleFilterGenre} genres={genres}/>
 
             <main className="grid">
                 {renderedTvShows}

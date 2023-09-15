@@ -41,7 +41,7 @@
   border: none;
   padding: 0 10px; 
   border-radius: 10px;
-  
+
 }
 
 .search-box input {
@@ -49,6 +49,8 @@
   outline: none;
   width: 100%;
 }
+
+
 
 .dropdown{
   top:100%;
@@ -76,17 +78,12 @@
   border-radius: 5px;
 }
 
-.genres{
-  background-color: #b22222;
-  top: 100%;
-  left: 0;
-  position: absolute;
-}
-.genres li{
-
-}
 
 .genres ul{
   padding: 0px;
   margin:0px;
+}
+
+.filter-icon:hover ,.search-icon:hover,.sort-icon:hover{
+  color: #b22222;
 }

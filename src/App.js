@@ -9,6 +9,7 @@ export default function App() {
         <div className="background">
           <Navbar />
           <Routes>
+            <Route path='/' element={<MoviePage />} />
             <Route path='/movies' element={<MoviePage />} />
             <Route path='/tv' element={<TvShowPage/>} />
           </Routes>

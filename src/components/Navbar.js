@@ -7,8 +7,8 @@ export default function Navbar() {
       <ul>
         <li><Link to='/movies'>Movies</Link></li>
         <li><Link to='/tv'>TV shows</Link></li>
-        <li><a href="">Recommended</a></li>
-        <li><a href="">Reviews</a></li>
+        {/* <li><a href="">Recommended</a></li>
+        <li><a href="">Reviews</a></li> */}
       </ul>
     </nav>
   );
